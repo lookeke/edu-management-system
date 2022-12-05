@@ -1,0 +1,88 @@
+{
+	"name": "edu-management-system",
+	"private": true,
+	"version": "0.1.0",
+	"type": "commonjs",
+	"description": "EDU management system",
+	"author": {
+		"name": "Rococo",
+		"email": "xicons@qq.com",
+		"url": "https://github.com/lookeke"
+	},
+	"engines": {
+		"node": ">=14",
+		"npm": ">=8",
+		"yarn": ">=1",
+		"pnpm": ">=6"
+	},
+	"keywords": [
+		"vpn"
+	],
+	"main": "./src/main.tsx",
+	"homepage": "https://github.com/lookeke/edu-management-system",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/lookeke/edu-management-system.git"
+	},
+	"bugs": {
+		"url": "https://github.com/lookeke/edu-management-system/issues"
+	},
+	"scripts": {
+		"dev:local": "vite --mode _local",
+		"dev:produ": "vite --mode release",
+		"build": "vite build",
+		"preview": "vite preview",
+		"tauri": "tauri",
+		"eslint": "eslint src/**/**.ts src/**/**.tsx",
+		"eslint:fix": "eslint --cache src --ext ts,tsx --fix",
+		"stylelint": "stylelint src/**/**.{css,scss,sass}",
+		"stylelint:fix": "stylelint src/**/**.{css,scss,sass} --fix"
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx}": "prettier --write"
+	},
+	"dependencies": {
+		"@reduxjs/toolkit": "^1.9.1",
+		"@tauri-apps/api": "^1.2.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-redux": "^8.0.5",
+		"react-router-dom": "^6.4.4"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.20.2",
+		"@babel/eslint-parser": "^7.19.1",
+		"@emotion/react": "^11.10.5",
+		"@emotion/styled": "^11.10.5",
+		"@mui/icons-material": "^5.10.14",
+		"@mui/material": "^5.10.14",
+		"@tauri-apps/cli": "^1.2.0",
+		"@types/node": "^18.11.9",
+		"@types/react": "^18.0.25",
+		"@types/react-dom": "^18.0.9",
+		"@typescript-eslint/eslint-plugin": "^5.44.0",
+		"@typescript-eslint/parser": "^5.44.0",
+		"@vitejs/plugin-react": "^2.2.0",
+		"eslint": "^8.28.0",
+		"eslint-config-alloy": "^4.7.0",
+		"eslint-import-resolver-typescript": "^3.5.2",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-react": "^7.31.11",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-react-hooks-addons": "^0.3.1",
+		"eslint-plugin-simple-import-sort": "^8.0.0",
+		"eslint-plugin-typescript-enum": "^2.1.0",
+		"postcss": "^8.4.19",
+		"prettier": "^2.7.1",
+		"sass": "^1.56.1",
+		"standard-version": "^9.5.0",
+		"stylelint": "^14.15.0",
+		"stylelint-config-prettier": "^9.0.4",
+		"stylelint-config-recess-order": "^3.0.0",
+		"stylelint-config-standard": "^29.0.0",
+		"stylelint-config-standard-scss": "^6.1.0",
+		"swiper": "^8.4.5",
+		"typescript": "^4.9.3",
+		"vite": "^3.2.4"
+	}
+}
