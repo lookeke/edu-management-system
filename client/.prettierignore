@@ -1,0 +1,12 @@
+# Ignore all files:
+*.html
+*.ejs
+*.mdx
+*.md
+/dist/*
+.local
+/node_modules/**
+
+**/*.svg
+**/*.sh
+/public/*
