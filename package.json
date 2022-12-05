@@ -4,7 +4,7 @@
 		"release": "standard-version -- --no-verify",
 		"release:major": "standard-version --release-as major -- --no-verify",
 		"release:minor": "standard-version --release-as minor -- --no-verify",
-		"publish": "git push --tags-follow"
+		"publish": "git push --follow-tags main main"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.3.0",
@@ -13,5 +13,5 @@
 		"lint-staged": "^13.1.0",
 		"standard-version": "^9.5.0"
 	},
-	"version": null
+	"version": "0.1.1"
 }
