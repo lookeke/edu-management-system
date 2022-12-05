@@ -1,0 +1,16 @@
+{
+	"scripts": {
+		"prepare": "husky install",
+		"release": "standard-version -- --no-verify",
+		"release:major": "standard-version --release-as major -- --no-verify",
+		"release:minor": "standard-version --release-as minor -- --no-verify",
+		"publish": "git push --tags-follow"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^17.3.0",
+		"@commitlint/config-conventional": "^17.3.0",
+		"husky": "^8.0.2",
+		"lint-staged": "^13.1.0",
+		"standard-version": "^9.5.0"
+	}
+}
