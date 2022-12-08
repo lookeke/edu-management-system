@@ -2,3 +2,11 @@
 	padding : 0;
 	margin  : 0;
 }
+
+/* 匹配根标签容器的空内容 */
+
+/* #root :empty::after{ */
+
+/* 	content: '暂无数据'; */
+
+/* } */
