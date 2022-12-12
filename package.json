@@ -4,7 +4,7 @@
 		"release": "standard-version -- --no-verify",
 		"release:major": "standard-version --release-as major -- --no-verify",
 		"release:minor": "standard-version --release-as minor -- --no-verify",
-		"publish": "git push --follow-tags main main"
+		"publish": "git push --follow-tags main"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.3.0",

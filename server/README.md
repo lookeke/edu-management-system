@@ -1,5 +1,4 @@
 # edu-management-system
 
-## Client
-
 ## Server
+**服务端**

@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 
+import routerReducer from '@/features/router'
 import profileReducer from '@/features/user/profile'
 
 export const store = configureStore({
 	reducer: {
-		profile: profileReducer
+		profile: profileReducer,
+		router: routerReducer
 	},
 })
 

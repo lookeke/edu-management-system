@@ -1,6 +1,7 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import Header from '@/pages/Header'
 import Login from '@/pages/Login'
 import ApplyFor from '@/pages/role/student/ApplyFor'
 import ApplyForClassRoom from '@/pages/role/student/ApplyForClassRoom'
@@ -13,6 +14,8 @@ import Profile from '@/pages/role/student/Profile'
 import Registration from '@/pages/role/student/Registration'
 import Schedule from '@/pages/role/student/Schedule'
 import { IRouter } from '@/types/index'
+
+import Layout from './components/Layout'
 
 // 路由
 export const element: IRouter = [
@@ -29,20 +32,26 @@ export const element: IRouter = [
 	{ path: '/login', element: <Login /> },
 ]
 
+const queryClient = new QueryClient()
 export default function App () {
-	return <BrowserRouter>
-		<Routes>
-			{
-				element.map((route, index) => (
-					<Route
-						key={ index }
-						element={ route.element }
-						path={ route.path }
-					/>
-				))
-			}
-		</Routes>
-		<Header />
-
-	</BrowserRouter>
+	return <QueryClientProvider client={ queryClient }>
+		<Layout>
+			{/* <Header /> */ }
+			<BrowserRouter>
+				<Routes>
+					{
+						element.map((route, index) => (
+							<Route
+								key={ index }
+								element={ route.element }
+								path={ route.path }
+							/>
+						))
+					}
+				</Routes>
+			</BrowserRouter>
+		</Layout>
+		{/* 开发模式浮动查询窗口 */ }
+		<ReactQueryDevtools initialIsOpen={ false } />
+	</QueryClientProvider>
 }

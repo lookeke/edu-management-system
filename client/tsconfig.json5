@@ -1,0 +1,85 @@
+{
+	"compilerOptions": {
+		"target": "ES2020",
+		// 指定编译后的目标版本
+		"useDefineForClassFields": true,
+		// 将 class 声明中的字段语义从 [[Set]] 变更到 [[Define]]
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ESNext"
+		],
+		// 包括的内置JS api类型定义
+		"allowJs": true,
+		// 允许在项目中导入js文件
+		"alwaysStrict": true,
+		// 以严格模式解析文件
+		"skipLibCheck": true,
+		// 跳过对导入的库进行类型检查
+		"esModuleInterop": true,
+		// 模块交互引用
+		"allowSyntheticDefaultImports": true,
+		// 允许从没有默认导出的模块进行默认导入
+		"strict": true,
+		// 严格的类型检查
+		"noUnusedLocals": true,
+		// 报告未使用的局部变量的错误
+		"noUnusedParameters": true,
+		// 报告函数中未使用参数的错误
+		"forceConsistentCasingInFileNames": true,
+		// 是否强制代码中使用的模块文件名必须和文件系统中的文件名保持大小写一致
+		"noFallthroughCasesInSwitch": true,
+		// 在switch的case语句中是否允许fallthrough
+		"experimentalDecorators": true,
+		// 允许实验性的装饰器用法
+		"module": "ESNext",
+		// 设置模块系统
+		"moduleResolution": "Node",
+		// 指定模块的解析策略
+		"resolveJsonModule": true,
+		// 允许导入扩展名为.json的模块
+		"isolatedModules": true,
+		// 将每个文件作为单独的模块
+		"noEmit": true,
+		// 不生成编译器输出文件，如JavaScript源代码、源映射或声明
+		"jsx": "react-jsx",
+		// 控制在所生成的js文件中jsx的结构
+		"sourceMap": true,
+		// 是否生成sourceMap文件
+		"noImplicitAny": true,
+		// 当有隐含的any类型时候报错
+		"noImplicitThis": true,
+		// 当this为隐含的any类型时候报错
+		"strictNullChecks": true,
+		// 严格的Null和undefined检查，例如设置为true时，在试图引用一个可能为undefined值的属性时候会报错
+		"types": [
+			// 如果指定了types，则只有列出的包将包含在全局作用域中
+			"node",
+			"./src/types"
+		],
+		"baseUrl": "./",
+		// 设置一个相对路径目录
+		"paths": {
+			// 重新映射相对于baseUrl的路径
+			"@/*": [
+				"src/*"
+			]
+		}
+	},
+	"include": [
+		// 指定需要编译处理的文件列表
+		"src/**/*.ts",
+		"src/**/*.tsx"
+	],
+	"exclude": [
+		// 指定解析include时应跳过的文件列表
+		"node_modules",
+		"dist"
+	],
+	"references": [
+		// 指定要引用的项目
+		{
+			"path": "./tsconfig.node.json"
+		}
+	]
+}
