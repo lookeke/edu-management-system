@@ -1,6 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { RouterService } from './router.service';
-import { CreateRouterDto } from './dto/createRouter.dto';
+import { Body, Controller, Post } from '@nestjs/common'
+import { RouterService } from './router.service'
+import { CreateRouterDto } from './dto/createRouter.dto'
 
 @Controller('router')
 export class RouterController {
@@ -8,7 +8,7 @@ export class RouterController {
 
 	@Post()
 	createRouter(@Body() router: CreateRouterDto) {
-		console.log(router);
-		return this.routerService.createRouter(router.role);
+		console.log(router)
+		return this.routerService.createRouter(router.role)
 	}
 }

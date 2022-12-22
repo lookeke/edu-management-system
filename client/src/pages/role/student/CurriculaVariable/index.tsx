@@ -1,7 +1,3 @@
-export default function CurriculaVariable () {
-	return (
-		<>
-			CurriculaVariable
-		</>
-	)
-};
+export default function CurriculaVariable() {
+	return <>CurriculaVariable</>
+}

@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { RouterSchema } from '../schemas/router.schema';
-import { RouterController } from './router.controller';
-import { RouterService } from './router.service';
+import { Module } from '@nestjs/common'
+import { MongooseModule } from '@nestjs/mongoose'
+import { RouterSchema } from '../schemas/router.schema'
+import { RouterController } from './router.controller'
+import { RouterService } from './router.service'
 
 @Module({
 	imports: [

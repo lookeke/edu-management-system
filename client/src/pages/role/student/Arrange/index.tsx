@@ -1,7 +1,3 @@
-export default function Arrange () {
-	return (
-		<>
-			Arrange
-		</>
-	)
-};
+export default function Arrange() {
+	return <>Arrange</>
+}

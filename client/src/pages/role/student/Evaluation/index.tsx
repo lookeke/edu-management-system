@@ -1,7 +1,3 @@
-export default function Evaluation () {
-	return (
-		<>
-			Evaluation
-		</>
-	)
-};
+export default function Evaluation() {
+	return <>Evaluation</>
+}

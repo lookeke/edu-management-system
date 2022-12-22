@@ -1,7 +1,3 @@
-export default function Profile () {
-	return (
-		<>
-			profile
-		</>
-	)
-};
+export default function Profile() {
+	return <>profile</>
+}

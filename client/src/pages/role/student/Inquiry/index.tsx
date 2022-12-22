@@ -1,7 +1,3 @@
-export default function Inquiry () {
-	return (
-		<>
-			Inquiry
-		</>
-	)
-};
+export default function Inquiry() {
+	return <>Inquiry</>
+}

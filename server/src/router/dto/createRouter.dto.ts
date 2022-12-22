@@ -1,3 +1,3 @@
 export class CreateRouterDto {
-	readonly role: number;
+	readonly role: number
 }

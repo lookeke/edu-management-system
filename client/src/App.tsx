@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Login from '@/pages/Login'
@@ -16,6 +17,7 @@ import Schedule from '@/pages/role/student/Schedule'
 import { IRouter } from '@/types/index'
 
 import Layout from './components/Layout'
+import { store } from './store'
 
 // 路由
 export const element: IRouter = [
@@ -33,25 +35,25 @@ export const element: IRouter = [
 ]
 
 const queryClient = new QueryClient()
-export default function App () {
-	return <QueryClientProvider client={ queryClient }>
-		<Layout>
-			{/* <Header /> */ }
-			<BrowserRouter>
-				<Routes>
-					{
-						element.map((route, index) => (
+export default function App() {
+	return (
+		<Provider store={store}>
+			<QueryClientProvider client={queryClient}>
+				<BrowserRouter>
+					<Layout />
+					<Routes>
+						{element.map((route, index) => (
 							<Route
-								key={ index }
-								element={ route.element }
-								path={ route.path }
+								key={index}
+								element={route.element}
+								path={route.path}
 							/>
-						))
-					}
-				</Routes>
-			</BrowserRouter>
-		</Layout>
-		{/* 开发模式浮动查询窗口 */ }
-		<ReactQueryDevtools initialIsOpen={ false } />
-	</QueryClientProvider>
+						))}
+					</Routes>
+				</BrowserRouter>
+				{/* 开发模式浮动查询窗口 */}
+				<ReactQueryDevtools initialIsOpen={false} />
+			</QueryClientProvider>
+		</Provider>
+	)
 }

@@ -1,7 +1,3 @@
-export default function ApplyFor () {
-	return (
-		<>
-			ApplyFor
-		</>
-	)
-};
+export default function ApplyFor() {
+	return <>ApplyFor</>
+}

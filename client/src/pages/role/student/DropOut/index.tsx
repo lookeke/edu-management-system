@@ -1,7 +1,3 @@
-export default function DropOut () {
-	return (
-		<>
-			DropOut
-		</>
-	)
-};
+export default function DropOut() {
+	return <>DropOut</>
+}

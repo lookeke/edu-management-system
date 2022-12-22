@@ -1,7 +1,3 @@
-export default function Schedule () {
-	return (
-		<>
-			Schedule
-		</>
-	)
-};
+export default function Schedule() {
+	return <>Schedule</>
+}

@@ -1,7 +1,3 @@
-export default function ApplyForClassRoom () {
-	return (
-		<>
-			ApplyForClassRoom
-		</>
-	)
-};
+export default function ApplyForClassRoom() {
+	return <>ApplyForClassRoom</>
+}

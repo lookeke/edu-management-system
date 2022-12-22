@@ -15,9 +15,9 @@ const initialState: { value: Route } = {
 	value: {
 		router: {
 			items: [],
-			role: null
+			role: null,
 		},
-	}
+	},
 }
 
 export const routerSlice = createSlice({

@@ -1,15 +1,15 @@
 import { LoadingButton } from '@mui/lab'
-import { Box, TextField } from '@mui/material'
+import { Alert, AlertTitle, Box, TextField } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
 import { ChangeEvent, useState } from 'react'
+import { Simulate } from 'react-dom/test-utils'
 import { useNavigate } from 'react-router-dom'
 
 import student from '@/assets/images/团队-1.svg'
 import defaultAvatar from '@/assets/images/头像-默认.svg'
 import { pwdVerifyRex, usrVerifyRex } from '@/config/verify'
-import { createRouter } from '@/features/router/index'
-import { updateUserInfo } from '@/features/user/profile'
+import { encrypt } from '@/utils/encrypt'
 import { useAppDispatch } from '@/utils/hooks/index'
 
 const LoginSubmit = ({
@@ -17,43 +17,53 @@ const LoginSubmit = ({
 	pwd,
 	loading,
 	setLoading,
+	setLoadingIndicator,
+	setErrorStatus,
 }: {
 	usr: string
 	pwd: string
 	loading: boolean
 	setLoading: (boolean: boolean) => void
+	setLoadingIndicator: (statusText: string) => void
+	setErrorStatus: (status: boolean) => void
 }) => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const getProfile = (usr: string, pwd: string, setLoading: (boolean: boolean) => void) => {
-		fetch(`${ import.meta.env.VITE_APP_USER_URL }`, {
+		fetch(import.meta.env.VITE_APP_PROFILE_URL, {
 			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ id: usr, password: pwd }),
-		})
-		.then(async(res) => {
-			const profile = await res.json()
-			console.log(profile)
-			dispatch(updateUserInfo(profile))
-			setLoading(false)
-			return profile.role
-		})
-		.then((role) => {
-			fetch(`${ import.meta.env.VITE_APP_ROUTER_URL }`, {
+			headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${ window.localStorage.getItem('token') }` },
+		}).then(async (res) => {
+			if (res.status > 401) {
+				throw new Error('网络请求出错!')
+			}
+			// token过期, 重新请求token
+			if (res.status === 401) {
+				fetch(import.meta.env.VITE_APP_USER_URL, {
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ userId: usr, password: encrypt(pwd) }),
+				}).then(async (res) => {
+					const token : { access_token:string } = await res.json()
+					token.access_token && localStorage.setItem('token',token.access_token)
+				}).catch((error) =>{
+					throw new Error('请求token失败! 服务器错误', error)
+				})
+			}
+			const userInfo: { access_token: string, role: number } = await res.json()
+			console.log(userInfo)
+			return userInfo.role
+		}).then((role) => {
+			fetch(import.meta.env.VITE_APP_ROUTER_URL, {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ role }),
+				headers: { 'Authorization': `Bearer ${ window.localStorage.getItem('token') }` },
+				body: JSON.stringify({ access_token: window.localStorage.getItem('token'), role }),
 			})
-			.then(async(res) => {
-				const routes = await res.json()
-				dispatch(createRouter(routes))
-			})
-		})
-		.then(() => {
-			navigate('/')
-		})
-		.catch((err) => {
-			console.info(err)
+				.then((res) => {
+					const profile = res.json()
+					console.log(profile)
+				})
+		}).catch(err => {
+			console.error(err.message)
 		})
 	}
 	return (
@@ -82,6 +92,8 @@ export default function Login () {
 	const [usrHelperText, setUsrHelperText] = useState<string>('请输入账号') // 账号是否校验错误的文字提示
 	const [pwdHelperText, setPwdHelperText] = useState<string>('请输入账号') // 密码是否校验错误的文字提示
 	const [loading, setLoading] = useState<boolean>(false) // 登录按钮的进度提示
+	const [loadingIndicator, setLoadingIndicator] = useState<string>('网络链接失败!') // 登录按钮的登录状态文字提示
+	const [errorStatus, setErrorStatus] = useState<boolean>(false) // 登录异常的状态
 
 	// 账号校验
 	const usrHandle = (event: string) => {
@@ -92,7 +104,7 @@ export default function Login () {
 		setUsrHelperText('4-16位数字字母!')
 
 		// 校验成功
-		if (usrVerifyRex.test(event)){
+		if (usrVerifyRex.test(event)) {
 			setUsrErr(false)
 			setUsrHelperText('✔')
 		}
@@ -106,7 +118,7 @@ export default function Login () {
 		setPwd(event)
 
 		// 校验成功
-		if (pwdVerifyRex.test(event)){
+		if (pwdVerifyRex.test(event)) {
 			setPwdErr(false)
 			setPwdHelperText('✔')
 		}
@@ -114,9 +126,19 @@ export default function Login () {
 
 	return (
 		<Box>
+			{ errorStatus ? (
+				<Alert severity="error">
+					<AlertTitle>错误!</AlertTitle>
+					<Typography>{ loadingIndicator }</Typography>
+				</Alert>
+			) : null }
+
 			<Box
 				sx={ {
+					width: '1080px',
+					height: '80vh',
 					columnCount: 2,
+					mx: 'auto',
 				} }
 			>
 				<Box
@@ -124,17 +146,18 @@ export default function Login () {
 					component="img"
 					src={ student }
 					sx={ {
-						maxWidth: '600px',
-						height: '100vh',
+						maxWidth: '500px',
+						height: '80vh',
 					} }
 				/>
 
 				<Box
 					sx={ {
 						display: 'flex',
-						justifyContent: 'space-between',
+						justifyContent: 'center',
 						alignItems: 'center',
 						flexDirection: 'column',
+						height: '80vh',
 					} }
 				>
 					<Avatar
@@ -182,7 +205,9 @@ export default function Login () {
 						<LoginSubmit
 							loading={ loading }
 							pwd={ pwd }
+							setErrorStatus={ setErrorStatus }
 							setLoading={ setLoading }
+							setLoadingIndicator={ setLoadingIndicator }
 							usr={ usr }
 						/>
 					</Box>

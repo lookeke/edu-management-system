@@ -1,7 +1,3 @@
-export default function Registration () {
-	return (
-		<>
-			Registration
-		</>
-	)
-};
+export default function Registration() {
+	return <>Registration</>
+}

@@ -6,7 +6,7 @@ import profileReducer from '@/features/user/profile'
 export const store = configureStore({
 	reducer: {
 		profile: profileReducer,
-		router: routerReducer
+		router: routerReducer,
 	},
 })
 
